@@ -12,6 +12,7 @@ import jobRouter from "./routes/jobRouter.js";
 
 // MIDDLEWARE
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+import { validateTest } from "./middleware/validationMiddleware.js";
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -25,16 +26,8 @@ app.get("/", (req, res) => {
 
 app.post(
   "/api/v1/test",
-  [body("name").notEmpty().withMessage("name is required")],
-  (req, res, next) => {
-    const errors = validationResult(req);
+  validateTest,
 
-    if (!errors.isEmpty()) {
-      const errorMessages = errors.array().map((error) => error.msg);
-      return res.status(400).json({ errors: errorMessages });
-    }
-    next();
-  },
   (req, res) => {
     const { name } = req.body;
     res.json({ msg: `hello ${name}` });
