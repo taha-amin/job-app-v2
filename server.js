@@ -9,6 +9,7 @@ import { validationResult, body } from "express-validator";
 
 // ROUTERS
 import jobRouter from "./routes/jobRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 // MIDDLEWARE
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/auth", authRouter);
 
 //NOT FOUND MIDDLEWARE
 //SPECIFICALLY DESIGNED TO HANDLE REQUESTS FOR NON-EXISTENT ROUTES
