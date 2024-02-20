@@ -20,14 +20,10 @@ export const login = async (req, res) => {
   // check if password is correct
 
   const user = await User.findOne({ email: req.body.email });
-  if (!user) throw new UnauthenticatedError("invalid credentials");
 
-  const isPasswordCorrect = await comparePassword(
-    req.body.password,
-    user.password
-  );
-
-  if (!isPasswordCorrect) throw new UnauthenticatedError("invalid credentials");
+  const isValidUser =
+    user && (await comparePassword(req.body.password, user.password));
+  if (!isValidUser) throw new UnauthenticatedError("invalid credentials");
 
   res.send("login");
 };
