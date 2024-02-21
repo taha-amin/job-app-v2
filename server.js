@@ -5,7 +5,8 @@ import express from "express";
 const app = express();
 import morgan from "morgan";
 import mongoose from "mongoose";
-import { validationResult, body } from "express-validator";
+// import { validationResult, body } from "express-validator";
+import cookieParser from "cookie-parser";
 
 // ROUTERS
 import jobRouter from "./routes/jobRouter.js";
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", (req, res) => {
