@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 
 //GET JOBS
 export const getAllJobs = async (req, res) => {
-  console.log(req);
+  console.log(req.user);
   const jobs = await Job.find({});
 
   res.status(StatusCodes.OK).json({ jobs });
