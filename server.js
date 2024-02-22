@@ -5,7 +5,6 @@ import express from "express";
 const app = express();
 import morgan from "morgan";
 import mongoose from "mongoose";
-// import { validationResult, body } from "express-validator";
 import cookieParser from "cookie-parser";
 
 // ROUTERS
