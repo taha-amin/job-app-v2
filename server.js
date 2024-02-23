@@ -5,12 +5,12 @@ import express from "express";
 const app = express();
 import morgan from "morgan";
 import mongoose from "mongoose";
-// import { validationResult, body } from "express-validator";
 import cookieParser from "cookie-parser";
 
 // ROUTERS
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 // MIDDLEWARE
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -27,7 +27,12 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.get("/api/v1/test", (req, res) => {
+  res.json({ msg: "test route " });
+});
+
 app.use("/api/v1/jobs", authenticateUser, jobRouter);
+app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/auth", authRouter);
 
 //NOT FOUND MIDDLEWARE

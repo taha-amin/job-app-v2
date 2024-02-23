@@ -3,16 +3,15 @@ import { StatusCodes } from "http-status-codes";
 
 //GET JOBS
 export const getAllJobs = async (req, res) => {
-  console.log(req);
-  const jobs = await Job.find({});
+  const jobs = await Job.find({ createdBy: req.user.userId });
 
   res.status(StatusCodes.OK).json({ jobs });
 };
 
 //CREATE JOB
 export const createJob = async (req, res) => {
-  const { company, position } = req.body;
-  const job = await Job.create({ company, position });
+  req.body.createdBy = req.user.userId;
+  const job = await Job.create(req.body);
 
   res.status(StatusCodes.CREATED).json({ job });
 };
