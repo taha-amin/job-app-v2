@@ -22,18 +22,17 @@ export const action = async ({ request, params }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await customFetch.path(`/jobs/${params.id}`, data);
+    await customFetch.patch(`/jobs/${params.id}`, data);
     toast.success("Job edited successfully");
     return redirect("/dashboard/all-jobs");
   } catch (error) {
-    toast.error(error.response.data.msg);
+    toast.error(error?.response?.data?.msg);
     return error;
   }
 };
 
 const EditJob = () => {
   const { job } = useLoaderData();
-  console.log(job);
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
