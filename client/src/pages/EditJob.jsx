@@ -8,8 +8,13 @@ import { toast } from "react-toastify";
 import customFetch from "../../../utils/customFetch";
 
 export const loader = async ({ params }) => {
-  console.log(params);
-  return null;
+  try {
+    const { data } = await customFetch.get(`/jobs/${params.id}`);
+    return data;
+  } catch (error) {
+    toast.error(error.response.data.msg);
+    return redirect("/dashboard/all-jobs");
+  }
 };
 
 export const action = async () => {
@@ -17,7 +22,12 @@ export const action = async () => {
 };
 
 const EditJob = () => {
-  return <h1>EditJob</h1>;
+  const { job } = useLoaderData();
+  console.log(job);
+
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  return <h1>EditJob Page</h1>;
 };
 
 export default EditJob;
