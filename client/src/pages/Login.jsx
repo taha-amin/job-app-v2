@@ -43,7 +43,7 @@ const Login = () => {
         <FormRow type="email" name="email" defaultValue="johndoe@gmail.com" />
         <FormRow type="password" name="password" defaultValue="testing0" />
         <SubmitBtn formBtn />
-        <button type="submit" className="btn btn-block" onClick={loginDemoUser}>
+        <button type="button" className="btn btn-block" onClick={loginDemoUser}>
           Explore The App
         </button>
         <p>
