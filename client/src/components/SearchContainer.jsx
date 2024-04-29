@@ -15,21 +15,21 @@ const SearchContainer = () => {
 
           <FormRow type="search" name="search" defaultValue="a" />
 
-          <FormRow
+          <FormRowSelect
             labelText="job status"
             name="jobStatus"
             list={["all", ...Object.values(JOB_STATUS)]}
             defaultValue="all"
           />
 
-          <FormRow
+          <FormRowSelect
             labelText="job type"
             name="jobType"
             list={["all", ...Object.values(JOB_TYPE)]}
             defaultValue="all"
           />
 
-          <FormRow
+          <FormRowSelect
             name="sort"
             defaultValue="newest"
             list={[...Object.values(JOB_SORT_BY)]}
