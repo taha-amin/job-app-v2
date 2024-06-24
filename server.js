@@ -19,7 +19,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.resolve(__dirname, "./public")));
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
 // MIDDLEWARE
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -51,7 +51,7 @@ app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/auth", authRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./public", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
 });
 
 //NOT FOUND MIDDLEWARE
