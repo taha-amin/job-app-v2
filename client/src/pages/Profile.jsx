@@ -5,10 +5,9 @@ import { redirect, useOutlet, useOutletContext } from "react-router-dom";
 import { Form } from "react-router-dom";
 import customFetch from "../../../utils/customFetch";
 import { toast } from "react-toastify";
-import { QueryClient } from "@tanstack/react-query";
 
 export const action =
-  (QueryClient) =>
+  (queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const file = formData.get("avatar");
@@ -20,7 +19,7 @@ export const action =
 
     try {
       await customFetch.patch("/users/update-user", formData);
-      QueryClient.invalidateQueries(["user"]);
+      queryClient.invalidateQueries(["user"]);
       toast.success("Profile updated successfully");
       return redirect("/dashboard");
     } catch (error) {
